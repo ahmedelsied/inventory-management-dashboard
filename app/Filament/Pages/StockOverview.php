@@ -4,12 +4,13 @@ namespace App\Filament\Pages;
 
 use App\Models\Item;
 use Filament\Pages\Page;
+use UnitEnum;
 
 class StockOverview extends Page
 {
     protected static ?string $navigationLabel = 'Stock Overview';
 
-    protected static ?string $navigationGroup = 'Inventory';
+    protected static string|UnitEnum|null $navigationGroup = 'Inventory';
 
     protected static ?int $navigationSort = 0;
 

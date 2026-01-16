@@ -8,6 +8,7 @@ use App\Filament\Resources\StockIns\Schemas\StockInForm;
 use App\Filament\Resources\StockIns\Tables\StockInsTable;
 use App\Models\StockIn;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -21,7 +22,7 @@ class StockInResource extends Resource
 
     protected static ?string $navigationLabel = 'Stock In';
 
-    protected static ?string $navigationGroup = 'Inventory';
+    protected static string|UnitEnum|null $navigationGroup = 'Inventory';
 
     protected static ?int $navigationSort = 2;
 

@@ -8,6 +8,7 @@ use App\Filament\Resources\StockOuts\Schemas\StockOutForm;
 use App\Filament\Resources\StockOuts\Tables\StockOutsTable;
 use App\Models\StockOut;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -21,7 +22,7 @@ class StockOutResource extends Resource
 
     protected static ?string $navigationLabel = 'Stock Out';
 
-    protected static ?string $navigationGroup = 'Inventory';
+    protected static string|UnitEnum|null $navigationGroup = 'Inventory';
 
     protected static ?int $navigationSort = 3;
 
