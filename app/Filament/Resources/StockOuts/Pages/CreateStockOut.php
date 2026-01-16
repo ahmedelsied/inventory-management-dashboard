@@ -5,6 +5,7 @@ namespace App\Filament\Resources\StockOuts\Pages;
 use App\Filament\Resources\StockOuts\StockOutResource;
 use App\Models\Item;
 use App\Models\StockOut;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +21,13 @@ class CreateStockOut extends CreateRecord
             $item = Item::lockForUpdate()->findOrFail($data['item_id']);
 
             if ($item->qty < $data['qty']) {
+
+                Notification::make()
+                    ->title('Insufficient stock')
+                    ->body('Insufficient stock for this withdrawal. Available: ' . $item->qty . ', Requested: ' . data_get($data, 'qty'))
+                    ->danger()
+                    ->send();
+
                 throw ValidationException::withMessages([
                     'qty' => 'Insufficient stock for this withdrawal.',
                 ]);
