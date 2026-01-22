@@ -7,6 +7,36 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Docker / Render Deployment
+
+This repo includes a production-ready `Dockerfile` that builds PHP dependencies and Vite assets, then serves the app with Apache.
+
+### Local run (Docker)
+
+```bash
+docker compose up --build
+```
+
+Then open `http://localhost:8080`.
+
+### Deploy on Render (Docker)
+
+- Create a new **Web Service** in Render
+- Select **Docker** as the runtime
+
+Recommended environment variables:
+
+- **APP_ENV**: `production`
+- **APP_DEBUG**: `false`
+- **APP_URL**: your Render URL (e.g. `https://your-service.onrender.com`)
+- **APP_KEY**: generate one locally via `php artisan key:generate --show`
+- **DATABASE_URL**: set automatically if you attach a Render Postgres database (the app supports it out of the box)
+- **RUN_MIGRATIONS**: `true` (optional; runs `php artisan migrate --force` on boot)
+
+Notes:
+
+- If you use file uploads, you’ll want persistent storage (Render Disk) mounted to `/var/www/html/storage`, or use an external object store.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
